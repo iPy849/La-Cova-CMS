@@ -1,0 +1,3 @@
+<template>
+¿Te perdiste?
+</template>
