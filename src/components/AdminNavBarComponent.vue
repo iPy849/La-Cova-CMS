@@ -23,12 +23,12 @@
                     <nav aria-label="Global">
                         <ul class="flex items-center gap-6 text-sm">
                             <li>
-                                <a
+                                <router-link
                                     class="text-gray-500 transition hover:text-gray-500/75"
-                                    href="/"
+                                    :to="{}"
                                 >
                                     About
-                                </a>
+                                </router-link>
                             </li>
 
                             <li>

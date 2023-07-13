@@ -1,5 +1,5 @@
 import { Databases, Query, ID } from 'appwrite';
-import client from '@/services/appwrite/appwriteApp';
+import client from './appwriteApp';
 
 const awDatabase = new Databases(client);
 const awDatabaseData = {

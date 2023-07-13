@@ -30,6 +30,23 @@ const routes = [
                 path: 'dashboard',
                 component: () => import('./../views/admin/DashboardView.vue'),
                 name: 'dashboard',
+                children: [
+                    {
+                        path: 'design-editor',
+                        component: () => import('../views/admin/dashboard/DesignEditorView.vue'),
+                        name: 'design-editor'
+                    },
+                    {
+                        path: 'section-editor',
+                        component: () => import('../views/admin/dashboard/SectionEditorView.vue'),
+                        name: 'section-editor'
+                    },
+                    {
+                        path: 'currency-editor',
+                        component: () => import('../views/admin/dashboard/CurrencyEditorView.vue'),
+                        name: 'currency-editor'
+                    }
+                ]
             },
         ]
     },

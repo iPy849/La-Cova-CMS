@@ -5,13 +5,11 @@ import {computed, ref} from "vue";
 const useAdminSessionStore = defineStore('counter', () => {
     // TODO: Hacer el login mediante jwt y poder controlar la expiración
     const userData = ref(null);
+    const setUserData = (userInfo) => (userData.value = userInfo);
     
-    const isLoggedIn = computed(() => userData.value !== null);
+    const isLoggedIn = computed(() => localStorage.getItem('cookieFallback') !== null);
     
-    const login = (userInfo) => (userData.value = userInfo);
-    const logout = (userInfo) => (userData.value = null);
-    
-    return { userData, isLoggedIn, login, logout }
+    return { userData, setUserData, isLoggedIn }
 });
 
 
