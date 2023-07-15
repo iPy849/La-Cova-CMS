@@ -1,16 +1,14 @@
-import { Account } from 'appwrite';
+import { Account, AppwriteException } from 'appwrite';
 import client from './appwriteApp';
 import useAdminSessionStore from '../../storage/adminStorage';
-import { acceptHMRUpdate } from 'pinia';
 
 const awAccount = new Account(client);
 
 async function login(user, password) {
     try {
-        const sessionData = await awAccount.createEmailSession(user, password);
-        useAdminSessionStore().setUserData(sessionData);
+        await awAccount.createEmailSession(user, password);
         return true;
-    } catch {
+    } catch (AppwriteException) {
         return false;
     }
     
@@ -30,6 +28,7 @@ async function logout() {
     try {
         await awAccount.deleteSessions()
         useAdminSessionStore().setUserData(null);
+        localStorage.removeItem('cookieFallback');
         return true;
      } catch {
          return false;

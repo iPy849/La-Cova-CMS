@@ -64,7 +64,7 @@
 </template>
 <script setup>
 import { onMounted, ref, watch } from 'vue';
-import services from '../../services';
+import services from '../services';
 import { useRouter } from 'vue-router';
 
 const emailValue = ref("");
@@ -88,15 +88,17 @@ onMounted(() => {
 
 });
 
-function FormHandler() {
+async function FormHandler() {
     formMessage.value = null;
     // Campos vacíos?
     if( emailValue.value === "" || passwordValue.value === ""){
         formMessage.value = "Debe rellenar el formulario antes de enviarlo"
     } else {  
         // Pudiste hacer login?
-        if (services.login(emailValue.value, passwordValue.value)){
-            router.push({name: 'dashboard'});
+        const didLogIn = await services.login(emailValue.value, passwordValue.value);
+        console.log(didLogIn);
+        if (didLogIn){
+            router.push({name: 'admin'});
         } else {
             formMessage.value = 'Usuario o contraseña incorrectos 🤷‍♂️'
         }

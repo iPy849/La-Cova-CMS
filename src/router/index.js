@@ -8,45 +8,35 @@ const routes = [
         name: 'home',
     },
     {
+        path: '/login',
+        component: () => import('./../views/LoginView.vue'),
+        name: 'login',
+    },
+    {
         path: '/admin',
         component: () => (import('./../views/admin/AdminLayoutView.vue')),
         name: 'admin',
-        beforeEnter: (to, from) => {
-            // No estás autenticado
-            if(!useAdminSessionStore().isLoggedIn) {
-                // No vas a autenticarte?
-                if (to.name !== 'login') {
-                    return {path: '/admin/login'}
-                }
+        beforeEnter: (to) => {
+            // No estás autenticado y No vas a autenticarte?
+            if(!useAdminSessionStore().isLoggedIn && to.name !== 'login') {
+                 return {name: 'login'};
             }
         },
         children: [
             {
-                path: 'login',
-                component: () => import('./../views/admin/LoginView.vue'),
-                name: 'login',
+                path: 'design-editor',
+                component: () => import('../views/admin/DesignEditorView.vue'),
+                name: 'design-editor'
             },
             {
-                path: 'dashboard',
-                component: () => import('./../views/admin/DashboardView.vue'),
-                name: 'dashboard',
-                children: [
-                    {
-                        path: 'design-editor',
-                        component: () => import('../views/admin/dashboard/DesignEditorView.vue'),
-                        name: 'design-editor'
-                    },
-                    {
-                        path: 'section-editor',
-                        component: () => import('../views/admin/dashboard/SectionEditorView.vue'),
-                        name: 'section-editor'
-                    },
-                    {
-                        path: 'currency-editor',
-                        component: () => import('../views/admin/dashboard/CurrencyEditorView.vue'),
-                        name: 'currency-editor'
-                    }
-                ]
+                path: 'menu-editor',
+                component: () => import('../views/admin/MenuEditorView.vue'),
+                name: 'menu-editor'
+            },
+            {
+                path: 'currency-editor',
+                component: () => import('../views/admin/CurrencyEditorView.vue'),
+                name: 'currency-editor'
             },
         ]
     },
