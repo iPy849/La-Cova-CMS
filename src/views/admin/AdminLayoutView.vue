@@ -1,12 +1,16 @@
 <template>
     <AdminNavBarComponent/>
-    <router-view />
-    Hola puto
+    <div class="px-6">
+        <router-view />
+    </div>
 </template>
 <script setup>
 import AdminNavBarComponent from "../../components/AdminNavBarComponent.vue";
-import useAdminSessionStore from "../../storage/adminStorage";
 import services from '../../services';
-services.retrieveUserInfo();
-useAdminSessionStore();
+import {onBeforeMount} from "vue";
+
+onBeforeMount(() => {
+    services.retrieveUserInfo();
+});
+
 </script>

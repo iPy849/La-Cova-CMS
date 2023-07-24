@@ -5,4 +5,4 @@ import './assets/main.scss';
 import App from './App.vue';
 
 
-createApp(App).use(router).use(createPinia()).mount('#app')
+createApp(App).use(createPinia()).use(router).mount('#app')
